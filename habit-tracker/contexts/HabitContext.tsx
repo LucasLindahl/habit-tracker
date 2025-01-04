@@ -1,11 +1,36 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 import { saveHabits, getHabits } from "../app/storage/storage"
 
+type HabitFrequency =
+  | "daily"
+  | "weekly"
+  | "monthly"
+  | "once"
+  | "twoDays"
+  | "threeDays"
+  | "fourDays"
+  | "fiveDays"
+  | "sixDays"
+  | "twoWeeks"
+  | "threeWeeks";
+
+type HabitColor = 
+  | "blue"
+  | "green"
+  | "red"
+  | "yellow"
+  | "purple"
+  | "pink"
+  | "brown"
+  | "orange"
+
 type Habit = {
   id: string;
   title: string;
-  frequency: "daily" | "weekly" | "monthly" | "custom";
-  color: string;
+  frequency: HabitFrequency;
+  color: HabitColor;
+  notificationTime: string;
+  startDate: string;
 };
 
 type HabitContextType = {

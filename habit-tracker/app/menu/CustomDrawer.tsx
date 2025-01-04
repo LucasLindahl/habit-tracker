@@ -39,12 +39,15 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   logoutButton: {
+    marginStart: 32,
+    marginBottom: 10,
     marginTop: 20,
     padding: 10,
     backgroundColor: "#E63946",
     borderRadius: 8,
     alignItems: "center",
     justifyContent: "center",
+    width: 300
   },
   logoutText: {
     color: "#FFF",
