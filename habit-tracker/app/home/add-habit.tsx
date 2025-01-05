@@ -54,6 +54,17 @@ export default function AddHabit() {
     threeWeeks: "Every 3 Weeks",
   };
 
+  const colorHexCodes: Record<string, string> = {
+    blue: "#007BFF",
+    green: "#28A745",
+    red: "#DC3545",
+    yellow: "#FFD700",
+    purple: "#6F42C1",
+    pink: "#E83E8C",
+    brown: "#795548",
+    orange: "#FD7E14",
+  };
+
   const handleConfirmTime = (time: Date) => {
     const formattedTime = time.toLocaleTimeString([], {hour: "2-digit", minute: "2-digit"});
     setNotificationTime(formattedTime);
@@ -82,9 +93,11 @@ export default function AddHabit() {
         id: Date.now().toString(),
         title: title,
         frequency: frequency,
-        color: color,
+        color: colorHexCodes[color],
+        colorName: color,
         notificationTime: notificationTime,
         startDate: startDate,
+        completedDates: [],
       });
     }
 

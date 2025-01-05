@@ -6,6 +6,7 @@ import CustomDrawer from "../menu/CustomDrawer";
 import Home from "./index"
 import ProfileScreen from "./profile";
 import AddHabit from "./add-habit";
+import AllHabits from "./all-habits";
 
 const Drawer = createDrawerNavigator();
 
@@ -25,6 +26,7 @@ export default function HomeLayout() {
         <Drawer.Screen name="Home" component={Home} />
         <Drawer.Screen name="Profile" component={ProfileScreen} />
         <Drawer.Screen name="Add habit" component={AddHabit} />
+        <Drawer.Screen name="All habits" component={AllHabits} />
     </Drawer.Navigator>
   );
 }

@@ -28,9 +28,11 @@ type Habit = {
   id: string;
   title: string;
   frequency: HabitFrequency;
-  color: HabitColor;
+  color: string;
+  colorName: HabitColor;
   notificationTime: string;
   startDate: string;
+  completedDates: string[];
 };
 
 type HabitContextType = {
@@ -39,6 +41,7 @@ type HabitContextType = {
   editHabit: (updatedHabit: Habit) => void;
   deleteHabit: (id: string) => void;
   loadHabits: (username: string) => void;
+  toggleHabitCompletion: (id: string, date: string) => void;
 };
 
 const HabitContext = createContext<HabitContextType | undefined>(undefined);
@@ -77,9 +80,26 @@ export const HabitProvider = ({ children }: { children: React.ReactNode }) => {
     if (currentUser) saveHabits(currentUser, updatedHabits);
   };
 
+  const toggleHabitCompletion = (id: string, date: string) => {
+    const updatedHabits = habits.map((habit) => {
+      if (habit.id === id) {
+        const isCompleted = habit.completedDates.includes(date);
+        return {
+          ...habit,
+          completedDates: isCompleted
+            ? habit.completedDates.filter((d) => d !== date) // Remove date if already completed
+            : [...habit.completedDates, date], // Add date if not completed
+        };
+      }
+      return habit;
+    });
+    setHabits(updatedHabits);
+    if (currentUser) saveHabits(currentUser, updatedHabits);
+  };
+
   return (
     <HabitContext.Provider
-      value={{ habits, addHabit, editHabit, deleteHabit, loadHabits }}
+      value={{ habits, addHabit, editHabit, deleteHabit, loadHabits, toggleHabitCompletion }}
     >
       {children}
     </HabitContext.Provider>
